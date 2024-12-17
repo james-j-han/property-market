@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import Header from "./Header";
 import Footer from "./Footer";
-import "../register.css";
+import '../register.css'
 
 function Register() {
   const [firstName, setFirstName] = useState("");
@@ -16,33 +16,9 @@ function Register() {
   const navigate = useNavigate();
   const BASE_URL = "https://loving-friendship-production.up.railway.app";
 
-  const validateFrom = () => {
-    const newErrors = {};
-
-    if (!firstName.trim()) newErrors.firstName = "First name is required.";
-    if (!lastName.trim()) newErrors.lastName = "Last name is required.";
-    if (!email.trim()) {
-      newErrors.email = "Email is required.";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Invalid email format.";
-    }
-    if (!password) {
-      newErrors.password = "Password is required.";
-    } else if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long.";
-    }
-
-    setErrors(newErrors);
-
-    // True if no errors
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleRegister = async (e) => {
     e.preventDefault();
     setError(""); // Clear previous errors
-
-    if (!validateFrom()) return;
 
     try {
       const response = await axios.post(`${BASE_URL}/register`, {
